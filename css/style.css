@@ -1,6 +1,30 @@
 body
 {
     background-color: #F5F5F5;
+
+    font-family: 'Lato', sans-serif;
+    color: #555;
+}
+
+h1,h2,h3
+{
+    color: #333;
+    padding-left: 10px;
+}
+
+h1
+{
+    font-size: 28px;
+}
+
+h2
+{
+    font-size: 24px;
+}
+
+h3
+{
+    font-size: 20px;
 }
 
 #header
@@ -16,17 +40,30 @@ body
     left: 0px;
 }
 
+#page_title
+{
+    background-image: url("../images/logo_back.png");
+    padding: 3px;
+    color: #F5F5F5;
+    font-size: 30px;
+    padding-left: 10px;
+    margin-left: -10px;
+    width: 200%;
+}
+
 #content
 {
-    background-color: #FFFFFF;
+    background-color: #FFF;
 
     width: 50%;
     margin: 0px auto;
     margin-top: 160px;
     padding: 10px;
+    padding-top: 1px;
 
-    border-bottom: 1px solid rgb(32, 144, 143);
-    border-right: 1px solid rgb(32, 144, 143);
+    border-bottom: 1px solid rgb(58, 69, 62);
+
+    overflow: hidden;
 }
 
 #header_logo
