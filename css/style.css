@@ -27,6 +27,17 @@ h3
     font-size: 20px;
 }
 
+a, a:visited, a:hover
+{
+    color: #2F9E85;
+    text-decoration: none;
+}
+
+a:hover
+{
+    color: #2AB797;
+}
+
 #header
 {
     background-image: url("../images/logo_back.png");
@@ -38,6 +49,31 @@ h3
     position: absolute;
     top: 0px;
     left: 0px;
+}
+
+#main
+{
+    margin-top: 200px;
+    width: 100%;
+}
+
+#navigation
+{
+    background-image: url("../images/logo_back.png");
+    
+    width: 100px;
+    margin-left: 10%;
+    margin-right: 20px;
+    float: left;
+
+    font-size: 22px;
+    color: #F5F5F5;
+}
+
+.nav_item
+{
+    position: inline;
+    margin: 10px;
 }
 
 #page_title
@@ -56,8 +92,9 @@ h3
     background-color: #FFF;
 
     width: 50%;
+    float: left;
+
     margin: 0px auto;
-    margin-top: 160px;
     padding: 10px;
     padding-top: 1px;
 
