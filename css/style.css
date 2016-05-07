@@ -45,6 +45,8 @@ a:hover
     font-weight: 500;
 }
 
+.important_text a { color: #F5F5F5; }
+
 #header
 {
     background-image: url("../images/logo_back.png");
@@ -64,9 +66,9 @@ a:hover
     width: 100%;
 }
 
-#navigation
+#main_nav
 {
-    background-image: url("../images/logo_back.png");
+    background-image: url("../images/logo_back_tall.png");
     
     min-width: 100px;
 
