@@ -1,16 +1,27 @@
-body
+html, body
 {
     background-color: #F5F5F5;
 
     font-family: 'Lato', sans-serif;
     color: #555;
+
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+p
+{
+    margin-top: 5px;
 }
 
 h1,h2,h3
 {
-    color: #333;
     padding-left: 10px;
+    margin-bottom: 0px;
+
     font-family: 'Catamaran', sans-serif;
+    color: #333;
 }
 
 h1
@@ -39,31 +50,90 @@ a:hover
     color: #2AB797;
 }
 
+table, th, td
+{
+    border: 1px solid #FFF;
+    border-collapse: collapse;
+    
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+table
+{
+    margin: 0pt auto;
+}
+
+th
+{
+    background-color: rgb(52, 43, 33);
+        
+    font-family: 'Catamaran', sans-serif;
+    color: #F5F5F5;
+}
+
+tr:nth-child(even)
+{
+    background-color: #F5F5F5;
+    border-color: #F5F5F5;
+}
+
 .important_text
 {
     font-family: 'Catamaran', sans-serif;
     font-weight: 500;
 }
 
-.important_text a { color: #F5F5F5; }
-
-#header
-{
-    background-image: url("../images/logo_back.png");
-    background-color: transparent;
-
-    width: 100%;
-    height: 128px;
-
-    position: absolute;
-    top: 0px;
-    left: 0px;
+.important_text a
+{ 
+    color: #F5F5F5; 
 }
 
-#main
+#container 
 {
-    margin-top: 200px;
-    width: 100%;
+   min-height: 100%;
+   position: relative;
+}
+
+#header 
+{
+   background-image: url("../images/logo_back.png");
+   background-color: transparent;
+
+   height: 128px;
+}
+
+#body 
+{
+    margin-top: 75px;
+
+    padding: 10px;
+    padding-bottom: 203px;
+}
+
+#footer 
+{
+   position:absolute;
+   bottom: 0;
+
+   width: 100%;
+   height: 128px;
+
+   background-color: rgb(58, 69, 62);
+   background-image: url("../images/logo_back.png");
+
+}
+
+#footer_text
+{
+    color: #F5F5F5;
+    font-size: 15px;
+
+    line-height: 1.8;
+
+    margin-top: 40px;
+    margin-left: 10%;
 }
 
 #main_nav
@@ -87,6 +157,21 @@ a:hover
     color: #F5F5F5;
 }
 
+#content
+{
+    background-color: #FFF;
+
+    width: 50%;
+    min-height: 300px;
+
+    padding: 10px;
+    padding-top: 1px;
+
+    border-bottom: 1px solid rgb(58, 69, 62);
+
+    overflow: hidden;
+}
+
 .nav_item
 {
     position: inline;
@@ -105,25 +190,8 @@ a:hover
     font-size: 30px;
     padding-left: 10px;
     margin-left: -10px;
+    margin-bottom: 20px;
     width: 200%;
-}
-
-#content
-{
-    background-color: #FFF;
-
-    width: 50%;
-
-    position: inline;
-    float: left;
-
-    margin: 0px auto;
-    padding: 10px;
-    padding-top: 1px;
-
-    border-bottom: 1px solid rgb(58, 69, 62);
-
-    overflow: hidden;
 }
 
 #header_logo
@@ -136,5 +204,4 @@ a:hover
 
     top: 57px;
     left: 20px;
-
 }

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<head>
+    
+    <title>OBJParser - Comparison</title>
+
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Catamaran:700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <div id="container">
+        <div id="header">
+            <a href="http://www.vertexfragment.com/"><div id="header_logo"></div></a>
+        </div>
+
+        <div id="body">
+            <div id="main_nav" class="important_text">
+    
+        <div class="nav_item"><a href="/objparser/index.html">Home</a></div>
+        <div class="nav_item"><a href="https://www.github.com/ssell/OBJParser">Code</a></div>
+        <div class="nav_item"><a href="/objparser/download.html">Download</a></div>
+        <div class="nav_item"><a href="/objparser/docs/index.html">Docs</a></div>
+        <div class="nav_item"><a href="/objparser/compare.html">Compare</a></div>
+    
+</div>
+
+
+ 
+            <div id="content">
+                <div id="page_title" class="important_text">
+    OBJParser - Comparison
+</div>
+
+<div id="page_content">
+    <p>Below is a performance comparison between OBJParser and various other open-source OBJ model importers. </p>
+<p>All tests were done on the same system, using the same models, and the results are an average over ten executions.</p>
+<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><p>All results are in seconds.</p>
+<table>
+<thead>
+<tr>
+<th>Library</th>
+<th>Sponza</th>
+<th>Angel</th>
+<th>Dragon</th>
+<th>Buddha</th>
+<th>Hairball</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OBJParser<sup>&#8224;</sup></td>
+<td>0.10</td>
+<td>0.64</td>
+<td>1.23</td>
+<td>1.57</td>
+<td>3.74</td>
+</tr>
+<tr>
+<td><a href="http://www.assimp.org/" target="_blank" rel="external">assimp</a></td>
+<td>0.15</td>
+<td>4.63</td>
+<td>7.72</td>
+<td>8.54</td>
+<td>12.78</td>
+</tr>
+<tr>
+<td><a href="https://www.github.com/syoyo/tinyobjloader" target="_blank" rel="external">tinyobjloader</a></td>
+<td>1.45</td>
+<td>38.44</td>
+<td>72.68</td>
+<td>84.81</td>
+<td>309.59</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Models"><a href="#Models" class="headerlink" title="Models"></a>Models</h3><table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Size (KB)</th>
+<th># Tris</th>
+<th># Verts</th>
+<th>Spatial</th>
+<th>Texture</th>
+<th>Normal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://graphics.cs.williams.edu/data/meshes.xml" target="_blank" rel="external">Dabrovic Sponza</a></td>
+<td>5,480</td>
+<td>66,450</td>
+<td>59,810</td>
+<td>&#10003;</td>
+<td>&#10003;</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="http://www.cc.gatech.edu/projects/large_models/angel.html" target="_blank" rel="external">Angel</a></td>
+<td>22,622</td>
+<td>474,048</td>
+<td>237,018</td>
+<td>&#10003;</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="http://graphics.cs.williams.edu/data/meshes.xml" target="_blank" rel="external">Chinese Dragon</a></td>
+<td>72,358</td>
+<td>871,306</td>
+<td>438,929</td>
+<td>&#10003;</td>
+<td></td>
+<td>&#10003;</td>
+</tr>
+<tr>
+<td><a href="http://graphics.cs.williams.edu/data/meshes.xml" target="_blank" rel="external">Happy Buddha</a></td>
+<td>90,857</td>
+<td>1,087,474</td>
+<td>549,333</td>
+<td>&#10003;</td>
+<td></td>
+<td>&#10003;</td>
+</tr>
+<tr>
+<td><a href="http://graphics.cs.williams.edu/data/meshes.xml" target="_blank" rel="external">Hairball</a></td>
+<td>230,524</td>
+<td>2,880,000</td>
+<td>1,441,098</td>
+<td>&#10003;</td>
+<td></td>
+<td>&#10003;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Platform"><a href="#Platform" class="headerlink" title="Platform"></a>Platform</h3><blockquote>
+<p><strong>Operating System:</strong> Windows 10<br><strong>CPU:</strong> Intel Core i7-4790K @ 4.00GHz<br><strong>RAM:</strong> 32 GB DDR3-1600<br><strong>Disk:</strong> SSD 540 MBps/98,000 IOPS Sequential/Random Read</p>
+</blockquote>
+<p><sup>&#8224;</sup> with memory-mapped files enabled</p>
+
+</div>
+
+            </div>
+        </div>
+
+        <div id="footer">
+    <div id="footer_text">
+        &#9426; 2016 Steven T Sell <br/>
+        Powered by <a href="http://www.hexo.io">Hexo</a>, Hosted by <a href="http://www.digitalocean.com">DigitalOcean</a>
+    </div>
+</div>
+
+    </div>
+</body>
+</html>
