@@ -79,6 +79,17 @@ tr:nth-child(even)
     border-color: #F5F5F5;
 }
 
+code
+{
+    font-size: 11pt;
+    color: #000;
+}
+
+ol
+{
+    list-style-type: none;
+}
+
 .important_text
 {
     font-family: 'Catamaran', sans-serif;
@@ -136,17 +147,14 @@ tr:nth-child(even)
     margin-left: 10%;
 }
 
-#main_nav
+
+#navbar
 {
-    background-image: url("../images/logo_back_tall.png");
-    
     min-width: 100px;
 
-    margin-top: 1px;
+    margin-top: 11px;
     margin-left: 10%;
     margin-right: 20px;
-    padding: 10px;
-    padding-bottom: 0px;
 
     position: inline;
     float: left;
@@ -155,6 +163,17 @@ tr:nth-child(even)
     font-weight: bold;
 
     color: #F5F5F5;
+}
+
+.nav_sidebar
+{
+    background-image: url("../images/logo_back_tall.png");
+    
+    margin-bottom: 20px;
+    min-width: 100px;
+
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 #content

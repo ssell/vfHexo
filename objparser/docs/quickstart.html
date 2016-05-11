@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<head>
+    
+    <title>OBJParser - Quick Start</title>
+
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Catamaran:700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/codeformat.css">
+</head>
+
+<body>
+    <div id="container">
+        <div id="header">
+            <a href="http://www.vertexfragment.com/"><div id="header_logo"></div></a>
+        </div>
+
+        <div id="body">
+            <div id="navbar">
+    <div id="main_nav" class="nav_sidebar important_text">
+        
+            <div class="nav_item"><a href="/objparser/index.html">Home</a></div>
+            <div class="nav_item"><a href="https://www.github.com/ssell/OBJParser">Code</a></div>
+            <div class="nav_item"><a href="/objparser/download.html">Download</a></div>
+            <div class="nav_item"><a href="/objparser/docs/index.html">Docs</a></div>
+            <div class="nav_item"><a href="/objparser/compare.html">Compare</a></div>
+        
+    </div>
+    <div id="secondary_nav" class="nav_sidebar important_text">
+        
+            <div class="nav_item"><a href="quickstart.html">Quick Start</a></div>
+<div class="nav_item"><a href="faqs.html">FAQs</a></div>
+<div class="nav_item"><a href="api.html">API</a></div>
+
+
+
+    </div>
+</div>
+
+ 
+            <div id="content">
+                <div id="page_title" class="important_text">
+    OBJParser - Quick Start
+</div>
+
+
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Assumptions"><span class="toc-number">1.</span> <span class="toc-text">Assumptions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Parsing-a-File"><span class="toc-number">2.</span> <span class="toc-text">Parsing a File</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Groups"><span class="toc-number">3.</span> <span class="toc-text">Groups</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Polygonal-Data"><span class="toc-number">4.</span> <span class="toc-text">Polygonal Data</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OBJPoint"><span class="toc-number">4.1.</span> <span class="toc-text">OBJPoint</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OBJLine"><span class="toc-number">4.2.</span> <span class="toc-text">OBJLine</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OBJFace"><span class="toc-number">4.3.</span> <span class="toc-text">OBJFace</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OBJVertexGroup"><span class="toc-number">4.4.</span> <span class="toc-text">OBJVertexGroup</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Vertex-Data"><span class="toc-number">5.</span> <span class="toc-text">Vertex Data</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Render-States"><span class="toc-number">6.</span> <span class="toc-text">Render States</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Materials"><span class="toc-number">7.</span> <span class="toc-text">Materials</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Supported-Statements"><span class="toc-number">8.</span> <span class="toc-text">Supported Statements</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#OBJ"><span class="toc-number">8.1.</span> <span class="toc-text">OBJ</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MTL"><span class="toc-number">8.2.</span> <span class="toc-text">MTL</span></a></li></ol></li></ol>
+
+
+<div id="page_content">
+    <h2 id="Assumptions"><a href="#Assumptions" class="headerlink" title="Assumptions"></a>Assumptions</h2><p>All end-user interactions with the OBJParser revolve around two primary classes: <code>OBJParser</code> and <code>OBJState</code>.</p>
+<p>The former is the class to invoke to perform the actual parse, while the latter stores the state of the parsed file. For the rest of this guide, the following assumptions will be made:</p>
+<ul>
+<li><code>parser</code> is an instance of <code>OBJParser</code></li>
+<li><code>state</code> is an instance of <code>OBJState</code></li>
+</ul>
+<h2 id="Parsing-a-File"><a href="#Parsing-a-File" class="headerlink" title="Parsing a File"></a>Parsing a File</h2><p>To parse an OBJ file, all you need to do is create an instance of the <code>OBJParser</code> and then provide a file path:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">OBJParser parser;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(parser.parseOBJFile(<span class="string">"test.obj"</span>) == OBJParser::Result::Success)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Success</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Failed</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Failed to parse with error: "</span> &lt;&lt; parser.getLastError() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Once parsed, the contents of the file are placed within an <code>OBJState</code> instance that belongs to the parser. This state can be retrieved via:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OBJState* state = parser.getOBJState();</span><br></pre></td></tr></table></figure>
+<p>This is a pointer to a member variable, not member pointer, of the parser. So as long as the parser is valid, the pointer to the state will be. But the parser will clear away the internal data of the state before starting each new parse.</p>
+<p>The rest of this guide will detail how to access and interpret data in the state.</p>
+<h2 id="Groups"><a href="#Groups" class="headerlink" title="Groups"></a>Groups</h2><p>A standard OBJ file is typically split into multiple groups. Each group can represent a single side of an individual mesh, or a single mesh among hundreds in a complex scene.</p>
+<p>Groups are identified by their unique names and they contain the polygonal structures that make up the model. A container of all parsed groups can be retrieved from the <code>OBJState</code> via:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;OBJGroup <span class="keyword">const</span>*&gt; groups;</span><br><span class="line">state-&gt;getGroups(groups);</span><br></pre></td></tr></table></figure>
+<h2 id="Polygonal-Data"><a href="#Polygonal-Data" class="headerlink" title="Polygonal Data"></a>Polygonal Data</h2><p>There are three different types of polygonal data that are stored inside of a group:</p>
+<ul>
+<li>Points</li>
+<li>Lines </li>
+<li>Faces </li>
+</ul>
+<p>These are represented by the <code>OBJPoint</code>, <code>OBJLine</code>, and <code>OBJFace</code> structures.</p>
+<h3 id="OBJPoint"><a href="#OBJPoint" class="headerlink" title="OBJPoint"></a>OBJPoint</h3><p>Vector of <code>OBJVertexGroup</code> objects. Each vertex group represents a single, individual point.</p>
+<h3 id="OBJLine"><a href="#OBJLine" class="headerlink" title="OBJLine"></a>OBJLine</h3><p>Vector of <code>OBJVertexGroup</code> objects. Each vertex group represents an individual segment of a single line.</p>
+<h3 id="OBJFace"><a href="#OBJFace" class="headerlink" title="OBJFace"></a>OBJFace</h3><p>A collection of four <code>OBJVertexGroup</code> objects.</p>
+<p>If all four vertex groups are in use, then the face represents a quad. If only three are in use, then the face represents a triangle.</p>
+<p>Additionally maintains a reference to the render state that was active when the face was declared. This is an index that can be supplied to <code>OBJState::getRenderState</code>.</p>
+<h3 id="OBJVertexGroup"><a href="#OBJVertexGroup" class="headerlink" title="OBJVertexGroup"></a>OBJVertexGroup</h3><p>A vertex group is a structure of three integer indices. Each index references a polygonal vertex element (spatial, texture, or normal) which can be used to access a specific vertex in the data containers.</p>
+<p>The OBJ file format specifies that all indices are 1-based and can additionally be negative. But as standard containers are 0-based and do not support negative values, these indices have been pre-transformed to work with them.</p>
+<p>All unspecified indices are set to -1. This can be used to not only check if normals, for example, are used, but to also check if an <code>OBJFace</code> represents a quad or triangle:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(face.group3.indexSpatial == <span class="number">-1</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Fourth vertex is unspecified. Face is a triangle.</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Fourth vertex is specified. Face is a quad.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Vertex-Data"><a href="#Vertex-Data" class="headerlink" title="Vertex Data"></a>Vertex Data</h2><p>There are four different types of vertex data that can be stored in an OBJ file:</p>
+<ul>
+<li>Spatial</li>
+<li>Texture</li>
+<li>Normal</li>
+<li>Parameter</li>
+</ul>
+<p>The first three are used by both polygonal and free-form structures, while the last is free-form only. They can be retrieved via:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;OBJVector4&gt; <span class="keyword">const</span>* spatial = state-&gt;getSpatialData();</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;OBJVector2&gt; <span class="keyword">const</span>* texture = state-&gt;getTextureData();</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;OBJVector3&gt; <span class="keyword">const</span>* normals = state-&gt;getNormalData();</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;OBJVector3&gt; <span class="keyword">const</span>* params  = state-&gt;getParameterData();</span><br></pre></td></tr></table></figure>
+<p>These can then be referenced by the index data stored in points, lines, faces, and curves. For example:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> spatial = state-&gt;getSpatialData();</span><br><span class="line">OBJFace face = group.faces[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">OBJVector4 vert0 = spatial-&gt;at(face.group0.indexSpatial);</span><br><span class="line">OBJVector4 vert1 = spatial-&gt;at(face.group1.indexSpatial);</span><br><span class="line">OBJVector4 vert2 = spatial-&gt;at(face.group2.indexSpatial);</span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Triangle Face"</span></span><br><span class="line">          &lt;&lt;     <span class="string">"V0: ("</span> &lt;&lt; vert0.x &lt;&lt; <span class="string">", "</span> &lt;&lt; vert0.y &lt;&lt; <span class="string">", "</span> &lt;&lt; vert0.z &lt;&lt; <span class="string">")\n"</span></span><br><span class="line">          &lt;&lt;     <span class="string">"V1: ("</span> &lt;&lt; vert1.x &lt;&lt; <span class="string">", "</span> &lt;&lt; vert1.y &lt;&lt; <span class="string">", "</span> &lt;&lt; vert1.z &lt;&lt; <span class="string">")\n"</span></span><br><span class="line">          &lt;&lt;     <span class="string">"V2: ("</span> &lt;&lt; vert2.x &lt;&lt; <span class="string">", "</span> &lt;&lt; vert2.y &lt;&lt; <span class="string">", "</span> &lt;&lt; vert2.z &lt;&lt; <span class="string">")"</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Render-States"><a href="#Render-States" class="headerlink" title="Render States"></a>Render States</h2><p>At any time during the parsing of an OBJ file, the render state of that model or scene may change. The most common of these state changes in modern applications is the material, but there are numerous other render state attributes.</p>
+<p>These states are most important when rendering faces, which is why each face maintains an index to the specific state that was active.</p>
+<p>As an example, we can retrieve the material that was active when a face was created by:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">OBJFace face = ...;</span><br><span class="line"></span><br><span class="line">OBJRenderState renderState = state-&gt;getRenderState(face.renderState);</span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Active Material: "</span> &lt;&lt; renderState.material &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Materials"><a href="#Materials" class="headerlink" title="Materials"></a>Materials</h2><p>Materials are parsed from <code>.mtl</code> files that are referenced in OBJ files via the <code>mtllib</code> statement. Each material file (also called libraries) can contain an indefinite number of individual materials.</p>
+<p>When parsed, the materials are stored in an internal map within the state in the form of <code>OBJMaterial</code> objects. They may be retrieved via:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;OBJMaterial <span class="keyword">const</span>*&gt; materials;</span><br><span class="line">state-&gt;getMaterials(materials);</span><br></pre></td></tr></table></figure>
+<p>Each material can have a multitude of elements, but the most important (and commonly used) are the reflectivity values and the texture maps.</p>
+<p>An example of fetching data from a material:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> OBJMaterial material = materials[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> name = material.getName();</span><br><span class="line"><span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> diffTexturePath = material.getDiffuseTexture().getPath();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> OBJMaterialProperty diffProp = material.getDiffuseReflectivity();</span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"Diffuse Reflectivity Property: \n"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">switch</span>(diffProp.type)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">case</span> OBJMaterialPropertyType::RGB:</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"RGB ("</span> &lt;&lt; diffProp.r &lt;&lt; <span class="string">", "</span> &lt;&lt; diffProp.g &lt;&lt; <span class="string">", "</span> &lt;&lt; diffProp.b &lt;&lt; <span class="string">")"</span>;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> OBJMaterialPropertyType::XYZ:</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"XYZ ("</span> &lt;&lt; diffProp.x &lt;&lt; <span class="string">", "</span> &lt;&lt; diffProp.y &lt;&lt; <span class="string">", "</span> &lt;&lt; diffProp.z &lt;&lt; <span class="string">")"</span>;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> OBJMaterialPropertyType::RFL:</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"RFL: '"</span> &lt;&lt; diffProp.rfl.path &lt;&lt; <span class="string">"'"</span>;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Supported-Statements"><a href="#Supported-Statements" class="headerlink" title="Supported Statements"></a>Supported Statements</h2><p>List of all statements supported by the OBJParser for both OBJ and MTL formats. Note all statements are case-sensitive.</p>
+<p>See the following links for more detailed explanations:</p>
+<p><a href="http://paulbourke.net/dataformats/obj/" target="_blank" rel="external">http://paulbourke.net/dataformats/obj/</a><br><a href="http://paulbourke.net/dataformats/mtl/" target="_blank" rel="external">http://paulbourke.net/dataformats/mtl/</a></p>
+<h3 id="OBJ"><a href="#OBJ" class="headerlink" title="OBJ"></a>OBJ</h3><table>
+<thead>
+<tr>
+<th>Statement</th>
+<th>Official</th>
+<th>Brief</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>v</code></td>
+<td>&#10003;</td>
+<td>Vertex spatial data</td>
+</tr>
+<tr>
+<td><code>vt</code></td>
+<td>&#10003;</td>
+<td>Vertex texture data</td>
+</tr>
+<tr>
+<td><code>vn</code></td>
+<td>&#10003;</td>
+<td>Vertex normal data</td>
+</tr>
+<tr>
+<td><code>vp</code></td>
+<td>&#10003;</td>
+<td>Vertex parameter data</td>
+</tr>
+<tr>
+<td><code>cstype</code></td>
+<td>&#10003;</td>
+<td>Free-form type</td>
+</tr>
+<tr>
+<td><code>deg</code></td>
+<td>&#10003;</td>
+<td>Free-form degree</td>
+</tr>
+<tr>
+<td><code>bmat</code></td>
+<td>&#10003;</td>
+<td>Free-form basis matrix</td>
+</tr>
+<tr>
+<td><code>step</code></td>
+<td>&#10003;</td>
+<td>Free-form step size</td>
+</tr>
+<tr>
+<td><code>p</code></td>
+<td>&#10003;</td>
+<td>Polygonal points</td>
+</tr>
+<tr>
+<td><code>l</code></td>
+<td>&#10003;</td>
+<td>Polygonal line</td>
+</tr>
+<tr>
+<td><code>f</code></td>
+<td>&#10003;</td>
+<td>Polygonal face (quad/tri)</td>
+</tr>
+<tr>
+<td><code>curv</code></td>
+<td>&#10003;</td>
+<td>Free-form curve</td>
+</tr>
+<tr>
+<td><code>curv2</code></td>
+<td>&#10003;</td>
+<td>Free-form 2D curve</td>
+</tr>
+<tr>
+<td><code>surf</code></td>
+<td>&#10003;</td>
+<td>Free-form surface</td>
+</tr>
+<tr>
+<td><code>parm</code></td>
+<td>&#10003;</td>
+<td>Free-form parameter</td>
+</tr>
+<tr>
+<td><code>trim</code></td>
+<td>&#10003;</td>
+<td>Free-form trim curve</td>
+</tr>
+<tr>
+<td><code>hole</code></td>
+<td>&#10003;</td>
+<td>Free-form hole curve</td>
+</tr>
+<tr>
+<td><code>scrv</code></td>
+<td>&#10003;</td>
+<td>Free-form special curve</td>
+</tr>
+<tr>
+<td><code>sp</code></td>
+<td>&#10003;</td>
+<td>Free-form special point</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td>&#10003;</td>
+<td>Free-form statement end</td>
+</tr>
+<tr>
+<td><code>con</code></td>
+<td>&#10003;</td>
+<td>Free-form surface connection</td>
+</tr>
+<tr>
+<td><code>g</code></td>
+<td>&#10003;</td>
+<td>Group state set</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>&#10003;</td>
+<td>Smoothing group state set</td>
+</tr>
+<tr>
+<td><code>mg</code></td>
+<td>&#10003;</td>
+<td>Merging group state set</td>
+</tr>
+<tr>
+<td><code>o</code></td>
+<td>&#10003;</td>
+<td>Object name</td>
+</tr>
+<tr>
+<td><code>bevel</code></td>
+<td>&#10003;</td>
+<td>Sets bevel interpolation</td>
+</tr>
+<tr>
+<td><code>c_interp</code></td>
+<td>&#10003;</td>
+<td>Sets color interpolation</td>
+</tr>
+<tr>
+<td><code>d_interp</code></td>
+<td>&#10003;</td>
+<td>Sets dissolve interpolation</td>
+</tr>
+<tr>
+<td><code>lod</code></td>
+<td>&#10003;</td>
+<td>Sets level-of-detail</td>
+</tr>
+<tr>
+<td><code>usemtl</code></td>
+<td>&#10003;</td>
+<td>Sets active material</td>
+</tr>
+<tr>
+<td><code>mtllib</code></td>
+<td>&#10003;</td>
+<td>Sets material library path</td>
+</tr>
+<tr>
+<td><code>shadow_obj</code></td>
+<td>&#10003;</td>
+<td>Sets shadow object</td>
+</tr>
+<tr>
+<td><code>trace_obj</code></td>
+<td>&#10003;</td>
+<td>Sets tracer object</td>
+</tr>
+<tr>
+<td><code>ctech</code></td>
+<td>&#10003;</td>
+<td>Curve subdivision technique</td>
+</tr>
+<tr>
+<td><code>stech</code></td>
+<td>&#10003;</td>
+<td>Surface subdivision technique</td>
+</tr>
+</tbody>
+</table>
+<h3 id="MTL"><a href="#MTL" class="headerlink" title="MTL"></a>MTL</h3><table>
+<thead>
+<tr>
+<th>Statement</th>
+<th>Official</th>
+<th>Brief</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>newmtl</code></td>
+<td>&#10003;</td>
+<td>Starts new material definition</td>
+</tr>
+<tr>
+<td><code>Ka</code></td>
+<td>&#10003;</td>
+<td>Ambient reflectivity</td>
+</tr>
+<tr>
+<td><code>Kd</code></td>
+<td>&#10003;</td>
+<td>Diffuse reflectivity</td>
+</tr>
+<tr>
+<td><code>Ks</code></td>
+<td>&#10003;</td>
+<td>Specular reflectivity</td>
+</tr>
+<tr>
+<td><code>Ke</code></td>
+<td></td>
+<td>Emissive reflectivity</td>
+</tr>
+<tr>
+<td><code>Tf</code></td>
+<td>&#10003;</td>
+<td>Transmission filter</td>
+</tr>
+<tr>
+<td><code>d</code></td>
+<td>&#10003;</td>
+<td>Dissolve</td>
+</tr>
+<tr>
+<td><code>Tr</code></td>
+<td></td>
+<td>Transparency (dissolve inverse)</td>
+</tr>
+<tr>
+<td><code>illum</code></td>
+<td>&#10003;</td>
+<td>Illumination</td>
+</tr>
+<tr>
+<td><code>Ns</code></td>
+<td>&#10003;</td>
+<td>Specular Exponent</td>
+</tr>
+<tr>
+<td><code>sharpness</code></td>
+<td>&#10003;</td>
+<td>Sharpness</td>
+</tr>
+<tr>
+<td><code>Ni</code></td>
+<td>&#10003;</td>
+<td>Optical density</td>
+</tr>
+<tr>
+<td><code>map_Ka</code></td>
+<td>&#10003;</td>
+<td>Ambient texture</td>
+</tr>
+<tr>
+<td><code>map_Kd</code></td>
+<td>&#10003;</td>
+<td>Diffuse texture</td>
+</tr>
+<tr>
+<td><code>map_ks</code></td>
+<td>&#10003;</td>
+<td>Specular texture</td>
+</tr>
+<tr>
+<td><code>map_Ns</code></td>
+<td>&#10003;</td>
+<td>Specular exponent texture</td>
+</tr>
+<tr>
+<td><code>map_Ke</code></td>
+<td></td>
+<td>Emissive texture</td>
+</tr>
+<tr>
+<td><code>map_d</code></td>
+<td>&#10003;</td>
+<td>Dissolve texture</td>
+</tr>
+<tr>
+<td><code>decal</code></td>
+<td>&#10003;</td>
+<td>Decal texture</td>
+</tr>
+<tr>
+<td><code>disp</code></td>
+<td>&#10003;</td>
+<td>Displacement Texture</td>
+</tr>
+<tr>
+<td><code>bump</code></td>
+<td>&#10003;</td>
+<td>Bump texture</td>
+</tr>
+<tr>
+<td><code>map_bump</code></td>
+<td></td>
+<td>Bump texture</td>
+</tr>
+<tr>
+<td><code>map_aat</code></td>
+<td>&#10003;</td>
+<td>Anti-aliasing texture</td>
+</tr>
+<tr>
+<td><code>refl</code></td>
+<td>&#10003;</td>
+<td>Reflection map</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+
+            </div>
+        </div>
+
+        <div id="footer">
+    <div id="footer_text">
+        &copy; 2016 Steven T Sell <br/>
+        Powered by <a href="http://www.hexo.io">Hexo</a> | Hosted by <a href="http://www.digitalocean.com">DigitalOcean</a>
+    </div>
+</div>
+
+    </div>
+</body>
+</html>
