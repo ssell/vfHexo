@@ -1,7 +1,15 @@
+figure
+{
+    width: 90%;
+    overflow: auto;
+}
+
 .highlight table
 {
     margin-left: 5px;
     padding: 0px;
+    width: 800px;
+    overflow: auto;
 }
 
 .gutter,.code
@@ -22,7 +30,7 @@
     border-width: 0px;
     color: #F5F5F5;
     width: 100%;
-    overflow: auto;
+    overflow-x: auto !important;
 }
 
 .keyword
