@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<head>
+    
+    <title>OBJParser - Build Guide</title>
+
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Catamaran:700' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>    
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/codeformat.css">
+</head>
+
+<body>
+    <div id="container">
+        <div id="header">
+            <a href="http://www.vertexfragment.com/"><div id="header_logo"></div></a>
+        </div>
+
+        <div id="body">
+            <div id="navbar">
+    <div id="main_nav" class="nav_sidebar important_text">
+        
+            <div class="nav_item"><a href="/objparser/index.html">Home</a></div>
+            <div class="nav_item"><a href="https://www.github.com/ssell/OBJParser">Code</a></div>
+            <div class="nav_item"><a href="/objparser/download.html">Download</a></div>
+            <div class="nav_item"><a href="/objparser/docs/index.html">Docs</a></div>
+            <div class="nav_item"><a href="/objparser/compare.html">Compare</a></div>
+        
+    </div>
+    <div id="secondary_nav" class="nav_sidebar important_text">
+        
+            <div class="nav_item"><a href="quickstart.html">Quick Start</a></div>
+<div class="nav_item"><a href="faqs.html">FAQs</a></div>
+<div class="nav_item"><a href="api/index.html">API</a></div>
+
+
+
+    </div>
+</div>
+
+ 
+            <div id="content">
+                <div id="page_title" class="important_text">
+    OBJParser - Build Guide
+</div>
+
+
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Dependencies"><span class="toc-number">1.</span> <span class="toc-text">Dependencies</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Boost-C"><span class="toc-number">1.1.</span> <span class="toc-text">Boost C++</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows"><span class="toc-number">2.</span> <span class="toc-text">Windows</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Batch-Script"><span class="toc-number">2.1.</span> <span class="toc-text">Batch Script</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Visual-Studio"><span class="toc-number">2.2.</span> <span class="toc-text">Visual Studio</span></a></li></ol></li></ol>
+
+
+<div id="page_content">
+    <h2 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h2><h3 id="Boost-C"><a href="#Boost-C" class="headerlink" title="Boost C++"></a>Boost C++</h3><p>OBJParser relies extensively on Boost Spirit which is a header-only parsing library. It is included as part of the standard Boost collection.</p>
+<p>The library is built and tested against Boost v1.60, but any later version should be compatible.</p>
+<p>OBJParser solutions expect the Boost library to be located at <code>%BOOST_DIR%</code> environment variable (ie. <code>BOOST_DIR=C:\Boost\boost_1_60_0</code> such that <code>%BOOST_DIR%\boost\spirit</code> is valid).</p>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><h3 id="Batch-Script"><a href="#Batch-Script" class="headerlink" title="Batch Script"></a>Batch Script</h3><p>There are two batch files provided to help build OBJParser: <code>msvc_build.bat</code> and <code>msvc_build_all.bat</code>.</p>
+<p>Envoking <code>msvc_build.bat</code> will build Debug/Release versions of the library for a given architecture and Visual Studio compiler. This build batch file should be called with the following:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msvc_build.bat ARCH MSVC</span><br></pre></td></tr></table></figure>
+<p>Where,</p>
+<p><strong><code>ARCH</code></strong> specifies the binary architecture. Valid values: <code>x86</code> and <code>x64</code>.</p>
+<p><strong><code>MSVC</code></strong> specifies the Visual Studio compiler version. Valid values: <code>120</code> and <code>140</code>.</p>
+<p>Example building 32-bit binaries for Visual Studio 2015:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msvc_build.bat x86 140</span><br></pre></td></tr></table></figure>
+<p>The <code>msvc_build_all.bat</code> simply build binaries for all supported architectures and Visual Studio versions.</p>
+<p>All generated binaries are placed in the bin subfolder.</p>
+<h3 id="Visual-Studio"><a href="#Visual-Studio" class="headerlink" title="Visual Studio"></a>Visual Studio</h3><p>Projects and solutions are provided for Visual Studio 2013 and 2015. These can be built and modified as like any other project.</p>
+
+</div>
+
+            </div>
+        </div>
+
+        <div id="footer">
+    <div id="footer_text">
+        &copy; 2016 Steven T Sell <br/>
+        Powered by <a href="http://www.hexo.io">Hexo</a> | Hosted by <a href="http://www.digitalocean.com">DigitalOcean</a>
+    </div>
+</div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<head>
+    
+    <title>BRDF Cheatsheet</title>
+
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Catamaran:700' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>    
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/codeformat.css">
+</head>
+
+<body>
+    <div id="container">
+        <div id="header">
+            <a href="http://www.vertexfragment.com/"><div id="header_logo"></div></a>
+        </div>
+
+        <div id="body">
+            <div id="navbar">
+    <div id="main_nav" class="nav_sidebar important_text">
+        
+            <div class="nav_item"><a href="/blog/index.html">Blog</a></div>
+            <div class="nav_item"><a href="/home/projects.html">Projects</a></div>
+            <div class="nav_item"><a href="/home/about.html">About</a></div>
+        
+    </div>
+    <div id="secondary_nav" class="nav_sidebar important_text">
+        
+
+    </div>
+</div>
+
+ 
+            <div id="content">
+                <div id="page_title" class="important_text">
+    BRDF Cheatsheet
+</div>
+
+
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Radiometery"><span class="toc-number">1.</span> <span class="toc-text">Radiometery</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Symbol-Table"><span class="toc-number">1.1.</span> <span class="toc-text">Symbol Table</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Visible-Spectrum"><span class="toc-number">1.2.</span> <span class="toc-text">Visible Spectrum</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BRDF-General-Theory"><span class="toc-number">2.</span> <span class="toc-text">BRDF General Theory</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Symbol-Table-1"><span class="toc-number">2.1.</span> <span class="toc-text">Symbol Table</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fresnel-Reflectance"><span class="toc-number">3.</span> <span class="toc-text">Fresnel Reflectance</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#External-Reflection"><span class="toc-number">3.1.</span> <span class="toc-text">External Reflection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Internal-Reflection"><span class="toc-number">3.2.</span> <span class="toc-text">Internal Reflection</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Symbol-Table-2"><span class="toc-number">3.3.</span> <span class="toc-text">Symbol Table</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Microfacet-Theory"><span class="toc-number">4.</span> <span class="toc-text">Microfacet Theory</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BRDF-Models"><span class="toc-number">5.</span> <span class="toc-text">BRDF Models</span></a></li></ol>
+
+
+<div id="page_content">
+    <h2 id="Radiometery"><a href="#Radiometery" class="headerlink" title="Radiometery"></a>Radiometery</h2><h3 id="Symbol-Table"><a href="#Symbol-Table" class="headerlink" title="Symbol Table"></a>Symbol Table</h3><table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Name</th>
+<th>Definition / Use</th>
+<th>Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><math><mi>c</mi></math></td>
+<td>Speed of Light</td>
+<td><math><mn>2.998</mn><mo>&times;</mo><msup><mn>10</mn><mn>8</mn></msup></math></td>
+<td>meters / second</td>
+</tr>
+<tr>
+<td><math><mi>h</mi></math></td>
+<td>Planck Constant</td>
+<td><math><mn>6.62620</mn><mo>&times;</mo><msup><mn>10</mn><mn>-34</mn></msup></math></td>
+<td>joule-seconds</td>
+</tr>
+<tr>
+<td><math><mi>&nu;</mi></math></td>
+<td>Frequency</td>
+<td><math><mfrac><mrow><mi>c</mi></mrow><mrow><mi>&lambda;</mi></mrow></mfrac></math></td>
+<td>Hertz</td>
+</tr>
+<tr>
+<td><math><mi>&lambda;</mi></math></td>
+<td>Wavelength</td>
+<td><math><mfrac><mrow><mi>c</mi></mrow><mrow><mi>&nu;</mi></mrow></mfrac></math></td>
+<td>meters</td>
+</tr>
+<tr>
+<td><math><mi>Q</mi></math></td>
+<td>Radiant Energy</td>
+<td><math><mi>h</mi><mi>&nu;</mi></math></td>
+<td>joules</td>
+</tr>
+<tr>
+<td><math><mi>&Phi;</mi></math>, <math><mi>P</mi></math></td>
+<td>Radiant Flux/Power</td>
+<td>Joules per second (Watts) emitted</td>
+<td></td>
+</tr>
+<tr>
+<td><math><mi>E</mi></math></td>
+<td>Irradiance</td>
+<td>Density of radiant flux over an area. Light flowing into a surface.</td>
+<td><math><mi>W</mi></math> / <math><msup><mi>m</mi><mn>2</mn></msup></math></td>
+</tr>
+<tr>
+<td><math><mi>M</mi></math></td>
+<td>Exitance</td>
+<td>Light flowing out of a surface.</td>
+<td><math><mi>W</mi></math> / <math><msup><mi>m</mi><mn>2</mn></msup></math></td>
+</tr>
+<tr>
+<td></td>
+<td>Radiant Flux Density</td>
+<td>Refers to both Irradiance and Exitance</td>
+<td></td>
+</tr>
+<tr>
+<td><math><mi>I</mi></math></td>
+<td>Radiant Intensity</td>
+<td><math><msub><mi>E</mi><mi>L</mi></msub><mo>(</mo><mi>r</mi><mo>)</mo><msup><mi>r</mi><mn>2</mn></msup> <br> Flux density with respect to solid angle.</math></td>
+<td></td>
+</tr>
+<tr>
+<td><math><mi>L</mi></math></td>
+<td>Radiance</td>
+<td>Density of light flow per area and per incoming direction.</td>
+</tr>
+</tbody>
+</table>
+<p>Should be noted that irradiance and radiance are modeled as RGB vectors.</p>
+<h3 id="Visible-Spectrum"><a href="#Visible-Spectrum" class="headerlink" title="Visible Spectrum"></a>Visible Spectrum</h3><div style="width: 100%;text-align: center;"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Linear_visible_spectrum.svg/605px-Linear_visible_spectrum.svg.png"><br><span style="font-size: 10px;margin-top: -10px;"><i>Image Credit <a href="https://commons.wikimedia.org/wiki/File:Linear_visible_spectrum.svg" target="_blank" rel="external">Gringer</a></i></span></div>
+
+<table><thead><tr><th>Color</th><th><math><mi>&lambda;</mi></math>(nm)</th><th><math><mi>&nu;</mi></math>(THz)</th><th><math><mi>Q</mi></math>(eV)</th></tr></thead><tbody><tr><td>Ultra-Violet</td><td>&lt; 380</td><td>&gt; 789</td><td>&gt; 3.26</td></tr><tr><td style="background-color: #EE82EE;color: #000000;">Violet</td><td>380 - 450</td><td>668 - 789</td><td>2.75 - 3.26</td></tr><tr><td style="background-color: #0000FF;color: #000000;">Blue</td><td>450 - 495</td><td>606 - 668</td><td>2.50 - 2.75</td></tr><tr><td style="background-color: #00FF00;color: #000000;">Green</td><td>495 - 570</td><td>526 - 606</td><td>2.17 - 2.50</td></tr><tr><td style="background-color: #FFFF00;color: #000000;">Yellow</td><td>570 - 590</td><td>508 - 526</td><td>2.10 - 2.17</td></tr><tr><td style="background-color: #FFA500;color: #000000;">Orange</td><td>590 - 620</td><td>484 - 508</td><td>2.00 - 2.10</td></tr><tr><td style="background-color: #FF0000;color: #000000;">Red</td><td>620 - 750</td><td>400 - 484</td><td>1.65 - 2.00</td></tr><tr><td>Infrared</td><td>&gt; 750</td><td>&lt; 400</td><td>&lt; 2.00</td></tr></tbody></table>
+
+<h2 id="BRDF-General-Theory"><a href="#BRDF-General-Theory" class="headerlink" title="BRDF General Theory"></a>BRDF General Theory</h2><p>Given an incoming direction, the BRDF models the relative amount of energy reflected in the outgoing view direction. The general (non-differential) form is defined as:</p>
+<div style="margin: 10px; margin-left: 50px;"><math><mi>f</mi><mfenced><mi mathvariant="bold">l</mi><mi mathvariant="bold">v</mi></mfenced><mspace><mo>=</mo><mspace><mfrac><mrow><msub><mi>L</mi><mi>o</mi></msub><mo>(</mo><mi mathvariant="bold">v</mi><mo>)</mo></mrow><mrow><msub><mi>E</mi><mi>L</mi></msub><mo style="text-decoration: overline;">cos</mo><msub><mi>&Theta;</mi><mi>i</mi></msub></mrow></mfrac></mspace></mspace></math></div>
+
+<p>Or, in plain english: radiance divided by irradiance.</p>
+<p>There are two constraints placed upon any realistic BRDF by the laws of physics. </p>
+<p>First of these is the <a href="https://en.wikipedia.org/wiki/Helmholtz_reciprocity" target="_blank" rel="external">Helmholtz Reciprocity</a> which states that incoming and outgoing light can be considered reversals of one another without affecting the BRDF outcome. This means that <math><mi mathvariant="bold">l</mi></math> and <math><mi mathvariant="bold">v</mi></math> can be switched, and the resulting value will be the same.</p>
+<p>The second law governing any realistic BRDF is <a href="https://en.wikipedia.org/wiki/Conservation_of_energy" target="_blank" rel="external">conservation of energy</a>. In general, the outgoing energy may not exceed the amount of incoming energy. This specifically affects surface to body transmission (must account for light reflected), body absorption, etc.</p>
+<p>In practice, artistic and/or performance requirements may necessitate an unrealistic BRDF - one that does not obey these two laws. </p>
+<p>A BRDF can model two different types of optical phenomena: surface and body reflectance. The surface of an object can never absorb light, but it instead either reflects it away or transmits it to the body substrate. The body, however, may absorb some of the transmitted light, or the light may be further reflected via a process called subsurface scattering. Light being reflected within the body of an object will continue until either it is entirely absorbed or it re-enters the surface and is reflected away.</p>
+<h3 id="Symbol-Table-1"><a href="#Symbol-Table-1" class="headerlink" title="Symbol Table"></a>Symbol Table</h3><table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Definition / Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><math><mi mathvariant="bold">l</mi></math></td>
+<td>Normalized vector pointing in the direction of the light source (<i>opposite</i> of the direction that the light is traveling)</td>
+</tr>
+<tr>
+<td><math><mi mathvariant="bold">v</mi></math></td>
+<td>Normalized vector pointing in the direction of the eye point.</td>
+</tr>
+<tr>
+<td><math><msub><mi>E</mi><mi>L</mi></msub></math></td>
+<td>Irradiance of the incoming light source measured along a plane perpendicular to <math><mi mathvariant="bold">l</mi></math>.</td>
+</tr>
+<tr>
+<td><math><msub><mi>L</mi><mi>o</mi></msub><mo>(</mo><mi mathvariant="bold">v</mi><mo>)</mo></math></td>
+<td>Outgoing radiance in the direction of the view vector <math><mi mathvariant="bold">v</mi></math>.</td>
+</tr>
+<tr>
+<td><math><mi mathvariant="bold">n</mi></math></td>
+<td>The macroscopic surface normal.</td>
+</tr>
+<tr>
+<td><math><msub><mi>&Theta;</mi><mi>i</mi></msub></math></td>
+<td>Angle between <math><mi mathvariant="bold">l</mi></math> and <math><mi>n</mi></math>.</td>
+</tr>
+<tr>
+<td><math><msub><mi>&Theta;</mi><mi>o</mi></msub></math></td>
+<td>Angle between <math><mi mathvariant="bold">v</mi></math> and <math><mi>n</mi></math>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Fresnel-Reflectance"><a href="#Fresnel-Reflectance" class="headerlink" title="Fresnel Reflectance"></a>Fresnel Reflectance</h2><p>Fresnel reflectance describes the interaction of light with a planar interface between two substances - the surface and body. While in theory the Fresnel equations require a perfect plane, this is not possible in a real surface (or the simulation of a real surface). The behavior described in this section assumes a perfect plane, while reflectance on a rougher body is covered in the next section by Microfacet Theory.</p>
+<p>Each ray of light is scattered into two different directions: the ideal reflection vector (<math><msub><mi mathvariant="bold">r</mi><mi>i</mi></msub></math>) or the ideal refraction vector (<math><mi mathvariant="bold">t</mi></math>). By the conservation of energy, any light not reflected along <math><msub><mi mathvariant="bold">r</mi><mi>i</mi></msub></math> is transmitted to the body along <math><mi mathvariant="bold">t</mi></math>. The proportion of transmitted flux is equal to:</p>
+<div style="margin: 10px; margin-left: 50px;"><math><mn>1</mn><mo>-</mo><msub><mi>R</mi><mi>F</mi></msub></math></div>
+
+<p>The ideal reflection vector is defined as:</p>
+<div style="margin: 10px; margin-left: 50px;"><math><msub><mi mathvariant="bold">r</mi><mi>i</mi></msub><mo>=</mo><mn>2</mn><mo>(</mo><mi mathvariant="bold">n</mi><mo>&sdot;</mo><mi mathvariant="bold">l</mi><mo>)</mo><mi mathvariant="bold">n</mi><mo>-</mo><mi mathvariant="bold">l</mi></math></div>
+
+<p>Fresnel reflectance (<math><msub><mi>R</mi><mi>F</mi></msub></math>) is dependent on both the incoming light angle <math><msub><mi>&Theta;</mi><mi>i</mi></msub></math> and the optical properties of the two substances (above and below) known as the refractive index.</p>
+<p>The refractive index of the substrate above the interface is denoted as <math><msub><mi>n</mi><mn>1</mn></msub></math>, and the index of the substrate below is <math><msub><mi>n</mi><mn>2</mn></msub></math>. For typical surface reflection, the substrate above the interface is assumed to be air and has a value of <math><mn>1</mn></math>. In this case, <math><msub><mi>n</mi><mn>2</mn></msub></math> is often denoted as <math><mi>n</mi></math> for simplicity.</p>
+<p>Snell&#39;s Law describes the relationship between <math><msub><mi>&Theta;</mi><mi>i</mi></msub></math>, <math><msub><mi>&Theta;</mi><mi>t</mi></msub></math>, and the reflection indices:</p>
+<div style="margin: 10px; margin-left: 50px;"><math><msub><mi>n</mi><mn>1</mn></msub><mo>sin</mo><mo>(</mo><msub><mi>&Theta;</mi><mi>i</mi></msub><mo>)</mo><mo>=</mo><msub><mi>n</mi><mn>2</mn></msub><mo>sin</mo><mo>(</mo><msub><mi>&Theta;</mi><mi>t</mi></msub><mo>)</mo></math></div>
+
+<p>Above, we give the proportion of transmitted <i>flux</i> and now we can give an equation modeling the proportion of transmitted-to-incident <i>radiance</i>:</p>
+<div style="margin: 10px; margin-left: 50px;"><math><msub><mi>L</mi><mi>t</mi></msub><mo>=</mo><mo>(</mo><mn>1</mn><mo>-</mo><msub><mi>R</mi><mi>F</mi></msub><mo>(</mo><msub><mi>&Theta;</mi><mi>i</mi></msub><mo>)</mo><mo>)</mo><mfrac><mrow><msubsup><mi>n</mi><mn>2</mn><mn>2</mn></msubsup></mrow><mrow><msubsup><mi>n</mi><mn>1</mn><mn>2</mn></msubsup></mrow></mfrac><msub><mi>L</mi><mi>i</mi></msub></math></div> 
+
+<h3 id="External-Reflection"><a href="#External-Reflection" class="headerlink" title="External Reflection"></a>External Reflection</h3><p>When light is in transition from the external substrate (typically air) to the object surface, it is called <i>external reflection</i>. This is in comparison to <i>internal reflection</i> where light is transitioning from the object to the external substrate.</p>
+<p>The reflectance function, <math><msub><mi>R</mi><mi>F</mi></msub></math>, takes the incoming angle <math><msub><mi>&Theta;</mi><mi>i</mi></msub></math> as input, and returns an RGB vector as the result. The value of <math><msub><mi>R</mi><mi>F</mi></msub><mo>(</mo><msub><mi>&Theta;</mi><mi>i</mi></msub><mo>)</mo></math> varies continuously over the visible spectrum with the following two characteristics:</p>
+<ul>
+<li><p>When <math><msub><mi>&Theta;</mi><mi>i</mi></msub><mo>=</mo><mn>0</mn><mi>&deg;</mi></math>, the value of <math><msub><mi>R</mi><mi>F</mi></msub><mo>(</mo><msub><mi>&Theta;</mi><mi>i</mi></msub><mo>)</mo></math> is a property of the substance.</p>
+</li>
+<li><p>As <math><msub><mi>&Theta;</mi><mi>i</mi></msub></math> increases, the value of <math><msub><mi>R</mi><mi>F</mi></msub><mo>(</mo><msub><mi>&Theta;</mi><mi>i</mi></msub><mo>)</mo></math> increases as well until it reaches white (<math><mn>1</mn></math> for all frequencies) at <math><mn>90</mn><mi>&deg;</mi></math>.</p>
+</li>
+</ul>
+<p>Though the value of <math><msub><mi>R</mi><mi>F</mi></msub></math> increases as <math><msub><mi>&Theta;</mi><mi>i</mi></msub></math> increases, the behavior is nonlinear. An approximation is given by Schlick:</p>
+<div style="margin: 10px; margin-left: 50px;"><math><msub><mi>R</mi><mi>F</mi></msub><mo>(</mo><msub><mi>&Theta;</mi><mi>i</mi></msub><mo>)</mo><mo>&asymp;</mo><msub><mi>R</mi><mi>F</mi></msub><mo>(</mo><mn>0</mn><mo>&deg;</mo><mo>)</mo><mo>+</mo><mo>(</mo><mn>1</mn><mo>-</mo><msub><mi>R</mi><mi>F</mi></msub><mo>(</mo><mn>0</mn><mo>&deg;</mo><mo>)</mo><mo>)</mo><mo>(</mo><mn>1</mn><mo>-</mo><mo style="text-decoration: overline;">cos</mo><msub><mi>&Theta;</mi><mi>i</mi></msub><msup><mo>)</mo><mn>5</mn></msup></math></div>
+
+<p>An alternative to the Schlick approximation is to pre-compute the values of <math><msub><mi>R</mi><mi>F</mi></msub><mo>(</mo><msub><mi>&Theta;</mi><mi>i</mi></msub><mo>)</mo></math> and access them via a look-up table or one-dimensional texture (though the additional cost of texture sampling during BRDF evaluation may be undesireable).</p>
+<p>Additionally, the value of <math><msub><mi>R</mi><mi>F</mi></msub><mo>(</mo><mn>0</mn><mo>&deg;</mo><mo>)</mo></math> may be computed from the refractive index (as opposed to being provided with the material):</p>
+<div style="margin: 10px; margin-left: 50px;"><math><msub><mi>R</mi><mi>F</mi></msub><mfenced><mrow><mn>0</mn><mo>&deg;</mo></mrow></mfenced><mo>=</mo><msup><mfenced><mfrac><mrow><mi>n</mi><mo>-</mo><mn>1</mn></mrow><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac></mfenced><mn>2</mn></msup></math></div> 
+
+<h3 id="Internal-Reflection"><a href="#Internal-Reflection" class="headerlink" title="Internal Reflection"></a>Internal Reflection</h3><h3 id="Symbol-Table-2"><a href="#Symbol-Table-2" class="headerlink" title="Symbol Table"></a>Symbol Table</h3><table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Definition / Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><math><msub><mi mathvariant="bold">r</mi><mi>i</mi></msub></math></td>
+<td>The ideal reflection direction. Forms the same angle <math><msub><mi>&Theta;</mi><mi>i</mi></msub></math> with <math><mi mathvariant="bold">n</mi></math> as <math><mi mathvariant="bold">l</mi></math>.</td>
+</tr>
+<tr>
+<td><math><mi mathvariant="bold">t</mi></math></td>
+<td>The ideal refraction vector. Forms the angle <math><msub><mi>&Theta;</mi><mi>t</mi></msub></math> with -<math><mi mathvariant="bold">n</mi></math>.</td>
+</tr>
+<tr>
+<td><math><msub><mi>R</mi><mi>F</mi></msub></math></td>
+<td>The Fresnel reflectance. For rendering, the value is an RGB vector.</td>
+</tr>
+<tr>
+<td><math><msub><mi>n</mi><mn>1</mn></msub></math></td>
+<td>Refractive Index of the substance above the interface. Value between 0 and 1.</td>
+</tr>
+<tr>
+<td><math><msub><mi>n</mi><mn>2</mn></msub></math></td>
+<td>Refractive Index of the substance below the interface.</td>
+</tr>
+<tr>
+<td><math><mi>n</mi></math></td>
+<td>Shorthand for <math><msub><mi>n</mi><mn>2</mn></msub></math> when <math><msub><mi>n</mi><mn>1</mn></msub></math> is 1 (air).</td>
+</tr>
+<tr>
+<td><math><msub><mi>L</mi><mi>t</mi></msub></math></td>
+<td>Transmitted radiance.</td>
+</tr>
+<tr>
+<td><math><msub><mi>L</mi><mi>i</mi></msub></math></td>
+<td>Incoming radiance.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Microfacet-Theory"><a href="#Microfacet-Theory" class="headerlink" title="Microfacet Theory"></a>Microfacet Theory</h2><h2 id="BRDF-Models"><a href="#BRDF-Models" class="headerlink" title="BRDF Models"></a>BRDF Models</h2>
+</div>
+
+            </div>
+        </div>
+
+        <div id="footer">
+    <div id="footer_text">
+        &copy; 2016 Steven T Sell <br/>
+        Powered by <a href="http://www.hexo.io">Hexo</a> | Hosted by <a href="http://www.digitalocean.com">DigitalOcean</a>
+    </div>
+</div>
+
+    </div>
+</body>
+</html>
