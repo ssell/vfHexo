@@ -54,8 +54,12 @@
 
 <div id="page_content">
     <h2 id="Dependencies"><a href="#Dependencies" class="headerlink" title="Dependencies"></a>Dependencies</h2><h3 id="Boost-C"><a href="#Boost-C" class="headerlink" title="Boost C++"></a>Boost C++</h3><p>OBJParser relies extensively on Boost Spirit which is a header-only parsing library. It is included as part of the standard Boost collection.</p>
-<p>The library is built and tested against Boost v1.60, but any later version should be compatible.</p>
+<p>The library is built and tested against <a href="">Boost v1.60</a>.</p>
 <p>OBJParser solutions expect the Boost library to be located at <code>%BOOST_DIR%</code> environment variable (ie. <code>BOOST_DIR=C:\Boost\boost_1_60_0</code> such that <code>%BOOST_DIR%\boost\spirit</code> is valid).</p>
+<p><strong>Note:</strong> If building OBJParser with support for memory-mapped files (which is recommended due to the significant performance increase), there is a dependency on the Boost Iostreams binary. </p>
+<p>A brief guide on building the complete Boost binaries can be found <a href="https://github.com/ssell/OcularEngine/wiki/Building-Boost-Libraries" target="_blank" rel="external">here</a>.</p>
+<p>Once built, the binaries are expected under the <code>%BOOST_DIR%\lib</code> directory. Example:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(BOOST_DIR)lib\msvc14.0\x86\libbost_iostreams-vc140-mt-gd-160.lib </span><br></pre></td></tr></table></figure>
 <h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h2><h3 id="Batch-Script"><a href="#Batch-Script" class="headerlink" title="Batch Script"></a>Batch Script</h3><p>There are two batch files provided to help build OBJParser: <code>msvc_build.bat</code> and <code>msvc_build_all.bat</code>.</p>
 <p>Envoking <code>msvc_build.bat</code> will build Debug/Release versions of the library for a given architecture and Visual Studio compiler. This build batch file should be called with the following:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msvc_build.bat ARCH MSVC</span><br></pre></td></tr></table></figure>
